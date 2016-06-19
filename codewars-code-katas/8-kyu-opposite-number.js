@@ -18,9 +18,9 @@ But can you do it in 1 line of code and without any conditionals?
 
 
 //--------------------------------------
-const opposite2 = number => -number;
+const opposite = number => -number;
 
-console.log(opposite2(-17));
+console.log(opposite(-17));
 
 /*
 The syntax for arrow functions comes in many flavors depending upon what you are
@@ -39,13 +39,13 @@ var reflect = function(value) {
 
 Also, 
 The const declaration creates a read-only reference to a value. It does not mean
-the value it holds is immutable, just that the variable identifier (opposite2)
+the value it holds is immutable, just that the variable identifier (opposite)
 cannot be reassigned.
 */
 
 
 
 //--------------------------------------
-function opposite3(number) {
+function opposite2(number) {
   return -number;
 }

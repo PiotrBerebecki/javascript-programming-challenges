@@ -3,7 +3,7 @@ console.clear();
 /*
 ----------------------------------------
 8 kyu
-Grasshopper - Grade book
+Grade book
 ----------------------------------------
 
 Complete the function so that it finds the mean of the three scores passed to it

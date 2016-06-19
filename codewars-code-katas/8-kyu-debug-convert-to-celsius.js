@@ -3,7 +3,7 @@ console.clear();
 /*
 ----------------------------------------
 8 kyu
-Grasshopper - Debug
+Debug
 ----------------------------------------
 
 Debug celsius converter Your friend is traveling abroad to the United States so
