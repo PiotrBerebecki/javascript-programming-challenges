@@ -53,4 +53,4 @@ function isValidIP2(str) {
 
 // ?: non capturing group is used to save resources as we don't need to 'remember' matches.
 // Negative lookahead used here (\.(?!$)|$) matches dot not at the end   or   end
-// Positve lookahead not used here (\.(?=$)|$) would matched dot at the end   or   end
+// Positive lookahead not used here (\.(?=$)|$) would match dot at the end   or   end
