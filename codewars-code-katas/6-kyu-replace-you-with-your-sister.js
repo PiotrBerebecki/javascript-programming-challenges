@@ -3,7 +3,7 @@ console.clear();
 /*
 -----------------------------------------
 6 kyu
-Repalce you with your sister (aka Evil Autocorrect Prank)
+Replace you with your sister (aka Evil Autocorrect Prank)
 -----------------------------------------
 
 Replaces all instances of "you" or "u" (not case sensitive) 
