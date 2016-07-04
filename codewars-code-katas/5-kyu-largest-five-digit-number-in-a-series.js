@@ -19,7 +19,7 @@ may be as large as 1000 digits.
 
 Example
 
-solution('10345670') // 34567
+solution('10345670') // 45670
 */
 
 
@@ -31,7 +31,7 @@ function findLargest(digits) {
   return Math.max(  Number(digits.substr(0,5)), findLargest(digits.substr(1))  );
 }
 
-console.log(  findLargest('10345670')  ); // 34567
+console.log(  findLargest('10345670')  ); // 45670
 
 // substr vs slice vs substring
 // What if the Second Argument is Omitted?

@@ -28,7 +28,7 @@ function toCamelCase(str) {
   return str.replace(/[-_](\w)/g, x => x[1].toUpperCase());
 }
 
-console.log(  toCamelCase2("the-stealth_warrior")  );
+console.log(  toCamelCase2("the-stealth_warrior")  ); // theStealthWarrior
 
 
 
