@@ -30,8 +30,8 @@ function say(word) {
     return word;
   }
   
-  say.toString = function() {   // required for Codewars test cases
-    return '';
+  say.toString = function() {   // required for Codewars test case
+    return '';                  // test(say, '')
   }
   
   return res;

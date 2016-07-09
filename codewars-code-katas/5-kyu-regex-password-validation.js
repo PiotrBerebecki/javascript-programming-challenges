@@ -35,15 +35,15 @@ console.log(  validate('abcdef2A')  ); // true
 
 // Lookahead and lookbehind, collectively called "lookaround", are zero-length 
 // assertions just like the start and end of line, and start and end of word 
-// anchors explained earlier in this tutorial. The difference is that lookaround 
-// actually matches characters, but then gives up the match, returning only 
-// the result: match or no match. That is why they are called "assertions". 
+// anchors. The difference is that lookaround actually matches characters, 
+// but then gives up the match, returning only the result: match or no match. 
+// That is why they are called "assertions". 
 // They do not consume characters in the string, but only assert whether 
 // a match is possible or not. Lookaround allows you to create regular 
 // expressions that are impossible to create without them, or that would get 
 // very longwinded without them.
 
-// We need to use beggining and end of string anchors to enclose our regex as 
+// We need to use beginning and end of string anchors to enclose our regex as 
 // otherwise 'abcdef2A_' would generate a match.
 
 

@@ -27,7 +27,7 @@ You can assume that you will only get positive integers as inputs.
 function divisors(integer) {
   var d1 = [];
   
-  for (n = 2; n * n < integer; n++) {
+  for (n = 2; n * n <= integer; n++) {
     if (integer % n === 0) {
       d1.push(n);
     }
@@ -44,9 +44,16 @@ function divisors(integer) {
 
 console.log(      JSON.stringify( divisors(12) )     ); // [2,3,4,6]
 
-// You don't need to analyse beyond the square root of the given integer
-// so the solution below does unnecessary checks beyond square root on integer
-// Using i <= integer / 2 as the loop condition instead of i * i <= integer 
+// If a number n is not a prime, it can be factored into two factors a and b:
+// n = a*b
+// If both a and b were greater than the square root of n, a*b would be greater than n. 
+// So at least one of those factors must be less or equal to the square root of n, 
+// and to check if n is prime, we only need to test for factors less than or equal to
+// the square root.
+
+// We don't need to analyse beyond the square root of the given integer
+// so the solution below does unnecessary checks beyond square root of integer.
+// Using i < integer / 2 as the loop condition instead of i * i <= integer 
 // means using O(n) instead of O(sqrt n)
 // For large numbers, the solution below will be significantly slower than it
 // needs to be. For example in the case of 1 trillion, there are 500 billion 
@@ -57,7 +64,7 @@ console.log(      JSON.stringify( divisors(12) )     ); // [2,3,4,6]
 // --------------------------------------
 function divisors2(integer) {
   var divisorArray = [];
-  for (var n = 2; n <= integer / 2; n++) {
+  for (var n = 2; n < integer / 2; n++) {
     if (integer % n === 0) {
      divisorArray.push(n);
     }
