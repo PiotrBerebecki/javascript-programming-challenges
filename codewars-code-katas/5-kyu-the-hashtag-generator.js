@@ -30,11 +30,19 @@ Example Input to Output:
 // regex
 function generateHashtag(str) {
   if (str === '') {return false;}
-  var cleaned = str.trim().replace(/(?:\s|^)([a-zA-Z])/g, (delim,word) => word.toUpperCase());
+  var cleaned = str.trim().replace(/(?:\s|^)([a-zA-Z])/g, (all,letter) => letter.toUpperCase());
   return cleaned.length > 139 ? false : '#' + cleaned;
 }
 
-// console.log(  generateHashtag('a very good Kata  ')  ); // '#AVeryGoodKata'
+console.log(  generateHashtag('a very good Kata  ')  ); // '#AVeryGoodKata'
+
+// The replacement in replace() can be a function. 
+// The first parameter to this function is the total match (`all` in the above).
+// The following parameters are the sub-matches corresponding to individual groups.
+// In the above example `letter` corresponds to the second group as the first group
+// is a non capture group. If the non capture group was not used then we could
+// achieve the same with:
+// ...replace(/(\s|^)([a-zA-Z])/g, (all,delim,letter) => letter.toUpperCase()...
 
 
 
