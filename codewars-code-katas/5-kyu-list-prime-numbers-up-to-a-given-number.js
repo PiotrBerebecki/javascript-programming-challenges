@@ -26,7 +26,7 @@ function prime(max) {
   }
   
   function isPrime(num) {
-    if (num < 2) {return false;}
+    if (num < 2) {return false;} // not required in this kata as i >= 2
     var limit = Math.sqrt(num);
     for (var j = 2; j <= limit; j++) {
       if (num % j === 0) {return false;}

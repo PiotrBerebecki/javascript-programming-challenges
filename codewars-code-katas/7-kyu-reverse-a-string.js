@@ -15,7 +15,7 @@ solution('world'); // returns 'dlrow'
 
 // --------------------------------------
 function reverseString(str){
-  return str.split('').reverse().join('')
+  return str.split('').reverse().join('');
 }
 
 // console.log(  reverseString('world')  ); // 'dlrow'
@@ -28,8 +28,7 @@ function reverseString(str){
 function reverseString2(str){
   var reversed = '';
   for (var i = str.length - 1; i >= 0; i--) {
-    console.log(i)
-    reversed += str[i]
+    reversed += str[i];
   }
   return reversed;
 }
@@ -40,5 +39,5 @@ function reverseString2(str){
 // recursive
 function reverseString3(str){
   if (str === '') {return '';}
-  return str[str.length-1] + reverseString3(str.slice(0,-1));
+  return str.slice(-1) + reverseString3(str.slice(0,-1));
 }
