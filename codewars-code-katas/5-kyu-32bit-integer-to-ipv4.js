@@ -37,7 +37,7 @@ function int32ToIp(int32) {
   return binary
     .match(/\d{8}/g)
     .map(el => parseInt(el, 2))
-    .join('.')
+    .join('.');
 }
 
 // console.log(  int32ToIp(2149583361)  ); // '128.32.10.1'
