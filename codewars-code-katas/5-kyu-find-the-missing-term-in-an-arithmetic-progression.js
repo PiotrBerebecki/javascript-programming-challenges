@@ -16,7 +16,7 @@ the original AP. Find the missing term.
 You have to write the function findMissing (list), 
 list will always be atleast 3 numbers.
 
-Example :
+Example:
 
 findMissing ([2,3,5]) == 4
 */
@@ -26,7 +26,7 @@ findMissing ([2,3,5]) == 4
 // --------------------------------------
 function findMissing(arr) {
   var step = (arr[arr.length - 1] - arr[0]) / arr.length;
-  return arr.filter((el, ind) => el !== arr[0] + step*ind)[0] - 1;
+  return arr.filter((el, ind) => el !== arr[0] + step*ind)[0] - step;
 }
 
 console.log(  findMissing([2,3,5])  ); // 4
@@ -40,7 +40,6 @@ console.log(  findMissing([2,3,5])  ); // 4
 // If one element is missing, e.g.
 // (10,15,25), the step change is
 //  (25 - 10) / lenght   (as there is no need to substract 1)
-  
 
 
 

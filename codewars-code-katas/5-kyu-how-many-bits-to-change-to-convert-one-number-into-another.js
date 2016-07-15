@@ -28,11 +28,13 @@ function convertBits(a, b) {
   if (a < b) {var minBin = a.toString(2); var maxBin =  b.toString(2);}
   else {var minBin = b.toString(2); var maxBin =  a.toString(2)}   
   
-  var flipCount = maxBin.length - minBin.length;
-
-  var minBinArr = minBin.split('');
-  var maxBinArr = maxBin.split('').splice(flipCount);
+  minBin = '0'.repeat(maxBin.length-minBin.length) + minBin;
   
+  var minBinArr = minBin.split('');
+  var maxBinArr = maxBin.split('');
+  
+  var flipCount = 0;
+
   minBinArr.forEach(function(el,ind) {
     if (el !== maxBinArr[ind]) {flipCount++;}
   });
@@ -45,12 +47,14 @@ console.log(  convertBits(1,0)  ); // 1, in binary (1,0)
 // console.log(  convertBits(4,0)  ); // 2, in binary (100, 0)
 // console.log(  convertBits2(4,5)  ); // 1, in binary (100, 101)
 // console.log(  convertBits(31,14)  ); // 2, in binary (11111, 1110)
+// console.log(  convertBits(7,17)  ); // 3, in binary (00111, 10001)
+// console.log(  convertBits2(0,0)  ); // 0, in binary (0,0)
 
 
 
 // --------------------------------------
 function convertBits2(a, b) { 
-  return ((a ^ b).toString(2).match(/1/g || [])).length
+  return ((a ^ b).toString(2).match(/1/g) || []).length
 }
 
 // ^ is the bitwise XOR operator (exclusive OR). It works directly on the binary form of numbers.
