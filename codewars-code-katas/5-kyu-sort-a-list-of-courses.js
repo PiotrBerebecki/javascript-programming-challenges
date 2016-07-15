@@ -27,7 +27,7 @@ function sortCourses(courses) {
   });
 }
 
-console.log(  sortCourses(['arts-1605', 'english-1501', 'sport-1502', 'sport-1502', ])  );
+console.log(  sortCourses(['arts-1605', 'english-1501', 'sport2-1502', 'sport-1502' ])  );
 // ["english-1501", "sport-1502", "sport2-1502", "arts-1605"]
 
 // localeCompare() compares two strings in the current locale
