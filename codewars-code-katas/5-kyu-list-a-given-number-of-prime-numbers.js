@@ -43,7 +43,7 @@ var Primes = {
     for (var i = primeArr[primeArr.length - 1] + 1 ; primeArr.length < n; i++) {
       if (this.isPrime(i)) {primeArr.push(i);}     
     }
-    return primeArr.slice(0, n);      
+    return primeArr;      
   },
   
   isPrime: function(num) {
