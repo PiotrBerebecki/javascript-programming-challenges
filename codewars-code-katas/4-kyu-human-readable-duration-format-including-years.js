@@ -6,7 +6,7 @@ console.clear();
 Human readable duration format including years
 -----------------------------------------
 
-Given a number representing seconds generate the following function.
+Given a number representing seconds generate the following function:
 
 formatDuration(1) // "1 second")
 formatDuration(62) // "1 minute and 2 seconds"
