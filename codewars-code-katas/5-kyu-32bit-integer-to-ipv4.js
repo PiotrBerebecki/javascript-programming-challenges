@@ -14,7 +14,7 @@ This address has 4 octets where each octet is a single byte (or 8 bits).
     3rd octet 10 has the binary representation: 00001010
     4th octet 1 has the binary representation: 00000001
 
-So 128.32.10.1 == 10000000.00100000.00001010.00000001
+So 128.32.10.1 => 10000000.00100000.00001010.00000001
 
 Because the above IP address has 32 bits, we can represent it 
 as the 32 bit number: 2149583361
