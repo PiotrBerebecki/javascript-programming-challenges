@@ -19,7 +19,7 @@ form of hexadecimal notation (ie "#FFF").
 
 Example
 
-hexStringToRGB("#FF9933") // returns {r:255, g:153, b:51}
+hexStringToRGB("#FF9933"); // returns {r:255, g:153, b:51}
 */
 
 
