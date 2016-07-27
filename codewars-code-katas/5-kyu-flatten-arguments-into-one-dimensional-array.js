@@ -35,6 +35,6 @@ function flatten(...input) {
 console.log(  JSON.stringify(flatten(1, [2, 3], 4, 5, [6, [7]]))  ); // [1, 2, 3, 4, 5, 6, 7]
 
 // The ...input in a function declaration is called rest parameter. It converts input parameters to an array 
-// when used as input withing the body of a function.
-// It acts the oppostite when used withing the function call - it passes to the function only
+// when used as input within the body of a function.
+// It acts the opposite when used withing the function call - it passes to the function only
 // the elements of an array.
