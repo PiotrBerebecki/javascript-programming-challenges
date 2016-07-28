@@ -40,10 +40,10 @@ var Primes = {
     var primeArr = this.primeCache;
     if (n <= primeArr.length) {return primeArr.slice(0, n);}  
     
-    for (var i = primeArr[primeArr.length - 1] + 1 ; primeArr.length < n; i++) {
-      if (this.isPrime(i)) {primeArr.push(i);}     
+    for (var i = primeArr[primeArr.length - 1] + 1; primeArr.length < n; i++) {
+      if (this.isPrime(i)) {primeArr.push(i);}
     }
-    return primeArr;      
+    return primeArr;
   },
   
   isPrime: function(num) {
