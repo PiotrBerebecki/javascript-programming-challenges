@@ -2,8 +2,7 @@ console.clear();
 
 /*
 -----------------------------------------
-7 kyu
-Find unique values in arrays (aka Sorted Union)
+Intermediate Algorithms - Find unique values in arrays aka Sorted Union
 -----------------------------------------
 
 Write a function that takes two or more arrays and returns a new array

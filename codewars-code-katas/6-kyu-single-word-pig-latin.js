@@ -39,7 +39,7 @@ function pigLatin(str) {
     return null;
   }
   str = str.toLowerCase();
-  var vowels = new RegExp ('[aeiou]', 'gi'); // or var vowels = /[aeiou]/gi
+  var vowels = new RegExp('[aeiou]', 'gi'); // or var vowels = /[aeiou]/gi
   
   var firstVowelIndex = str.search(vowels);
   
@@ -73,7 +73,7 @@ function pigLatin2(str) {
 // --------------------------------------
 // As above but using ternary operator
 function pigLatin3(str) {
-  if ( (/[^a-zA-Z]/).test(str) ) return null;
+  if ( (/[^a-zA-Z]/).test(str) ) {return null;}
   str = str.toLowerCase();
   return (/^[aeiou]/g).test(str) ?
       str + 'way' :
