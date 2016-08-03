@@ -28,11 +28,18 @@ rot13('abcd a&b'); // 'nopq n&o'
 
 
 // --------------------------------------
+// Universal caesar's cipher. 13 needs to be changed to the desired key.
 function rot13(str) {
-  return str.replace(/[a-z]/gi, letter => String.fromCharCode(letter.charCodeAt(0) + (letter.toLowerCase()<='m' ? 13 : -13)));
-}
+  var asciiDiff;
+  
+  return str.replace(/[a-z]/gi, function(letter) {
+    if (letter === letter.toLowerCase()) {asciiDiff = 97;}
+    else                                 {asciiDiff = 65;}
+    return String.fromCharCode( (letter.charCodeAt(0) - asciiDiff + 13) % 26 + asciiDiff );
+  });
+ }
 
-// console.log(  rot13B('abcd')  ); // 'nopq'
+// console.log(  rot13('abcd')  ); // 'nopq'
 // console.log(  rot13('ABCD')  ); // 'NOPQ'
 // console.log(  rot13('mnopq')  ); // 'zabcd'
 // console.log(  rot13('abcd a&b')  ); // 'nopq n&o'
@@ -40,7 +47,16 @@ function rot13(str) {
 
 
 // --------------------------------------
-function rot13B(str) {
+// Only works for 13
+function rot13_2(str) {
+  return str.replace(/[a-z]/gi, letter => String.fromCharCode(letter.charCodeAt(0) + (letter.toLowerCase()<='m' ? 13 : -13)));
+}
+
+
+
+// --------------------------------------
+// Only works for 13
+function rot13_3(str) {
   var a = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var b = 'nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM';
   return str.replace(/[a-z]/gi, letter => b[a.indexOf(letter)]);
