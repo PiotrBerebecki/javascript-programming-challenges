@@ -27,6 +27,15 @@ String.split()
 
 // --------------------------------------
 function pairElement(str) {
+  return str.split('').map(el => [el, {'G':'C', 'C':'G', 'A':'T', 'T':'A'}[el]]);
+}
+
+console.log(   JSON.stringify(pairElement22('GCG'))   ); // [["G","C"],["C","G"],["G","C"]]
+
+
+
+// --------------------------------------
+function pairElement2(str) {
   return str
     .split('')
     .map(function(el) {
@@ -39,12 +48,10 @@ function pairElement(str) {
   });
 }
 
-console.log(   JSON.stringify(pairElement('GCG'))   ); // [["G","C"],["C","G"],["G","C"]]
-
 
 
 // --------------------------------------
-function pairElement2(str) {
+function pairElement3(str) {
   // Return each strand as an array of two elements, the original and the pair.
   var paired = [];
 
@@ -77,14 +84,14 @@ function pairElement2(str) {
 
 
 // --------------------------------------
-function pairElement3(str) {
+function pairElement4(str) {
   // Define a map object with all pair possibilities 
   var dnaMap = {T:'A', A:'T', G:'C', C:'G'};
   // Split str into a char Array
-  strArr = str.split('');
+  var strArr = str.split('');
   // Replace each Array item with a 2d Array using map
   for (var i = 0; i < strArr.length; i++) {
     strArr[i] = [ strArr[i], dnaMap[str[i]] ];
   }
- return strArr;
+  return strArr;
 }
