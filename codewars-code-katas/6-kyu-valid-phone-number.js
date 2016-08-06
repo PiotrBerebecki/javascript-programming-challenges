@@ -28,4 +28,4 @@ function validPhoneNumber(str) {
   return /^\(\d{3}\)\s\d{3}-\d{4}$/.test(str);
 }
 
-// console.log(  validPhoneNumber('(123) 456-7890')  ); // true
+console.log(  validPhoneNumber('(123) 456-7890')  ); // true
