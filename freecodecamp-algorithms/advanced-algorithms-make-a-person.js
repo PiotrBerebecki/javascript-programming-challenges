@@ -59,7 +59,7 @@ var Person2 = function(firstAndLast) {
 var bob = new Person('Bob Ross');
 console.log(  bob.getFirstName()  ) //should return "Bob".
 
-// console.log(  Object.keys(bob).length  ) //should return 6.
+console.log(  Object.keys(bob).length  ) //should return 6.
 // console.log(  bob instanceof Person  ) // should return true.
 // console.log(  bob.firstNameh  ) //should return undefined.
 // console.log(  bob.lastNameh  ) //should return undefined.
