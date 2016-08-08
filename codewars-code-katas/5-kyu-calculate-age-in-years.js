@@ -7,7 +7,7 @@ Calculate age in years
 -----------------------------------------
 
 Complete the following function that will return the difference in years (age)
-for a birthdate, and optionally a "now" date.
+for a birth date, and optionally a "now" date.
 Both arguments to the function are expected to be Date objects.
 The returned difference can be either positive or negative.
 
