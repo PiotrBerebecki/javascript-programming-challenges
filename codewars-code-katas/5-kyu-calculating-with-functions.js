@@ -6,10 +6,10 @@ console.clear();
 Calculating with Functions
 -----------------------------------------
 
-seven(times(five())); // must return 35
-four(plus(nine())); // must return 13
-eight(minus(three())); // must return 5
-six(dividedBy(two())); // must return 3
+seven(times(five())); // 35
+four(plus(nine())); // 13
+eight(minus(three())); // 5
+six(dividedBy(two())); // 3
 
 The most outer function represents the left operand,
 the most inner function represents the right operand
