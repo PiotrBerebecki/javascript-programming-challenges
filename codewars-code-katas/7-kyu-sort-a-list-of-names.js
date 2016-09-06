@@ -1,4 +1,4 @@
-console.clear();
+  // console.clear();
 
 /*
 -----------------------------------------
@@ -17,4 +17,12 @@ function sortme(names) {
   return names.sort();
 }
 
-console.log(  sortme(['adam','john','wlad', 'antos'])  ); // ['adam', 'antos', 'john', 'wlad']
+// console.log(  sortme(['adam','john','wlad', 'antos'])  ); // ['adam', 'antos', 'john', 'wlad']
+
+
+
+// --------------------------------------
+// Arrow function
+const sortme2 = (names) => names.sort();
+
+console.log(  sortme2(['adam','johny','wlad', 'antos'])  ); // ['adam', 'antos', 'johny', 'wlad']
