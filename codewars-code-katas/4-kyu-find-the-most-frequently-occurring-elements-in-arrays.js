@@ -74,9 +74,9 @@ console.log(  JSON.stringify(getMostFrequent(forecast_01))  ); // should return 
 // --------------------------------------
 // How to sort an array so that the most frequent element is put to the end.
 function getMostFrequent2(arr) {
-   return arr.sort(function(a, b) { 
-      return arr.filter(el => el === a).length - arr.filter(el => el === b).length;
-    }); // add arr.pop() or arr.slice(-1) to return just the most frequent element
+  return arr.sort(function(a, b) { 
+    return arr.filter(el => el === a).length - arr.filter(el => el === b).length;
+  }); // add arr.pop() or arr.slice(-1) to return just the most frequent element
 }
 
 // console.log(  getMostFrequent2([3,4,3])  );
