@@ -1,4 +1,4 @@
-console.clear();
+// console.clear();
 
 /*
 -----------------------------------------
@@ -20,7 +20,14 @@ Don't worry about uppercase vowels.
 
 //----------------------------------------
 function shortcut(string) {
-  return string.replace(/[aeiou]/g, "");
+  return string.replace(/[aeiou]/g, '');
 }
 
-console.log(shortcut("codewars"));
+console.log(shortcut('codewars')); // cdwrs
+
+
+
+//----------------------------------------
+function shortcut2(string) {
+  return string.split(/[aeiou]/).join('');
+}
