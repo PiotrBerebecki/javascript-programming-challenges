@@ -23,7 +23,7 @@ Math.roundTo = function(number, precision)  {
   return Number((+(Math.round(+(number + 'e' + precision)) + 'e' + -precision)).toFixed(precision));
 }
 // only the solution above returns 35.86 when calling Math.roundTo(35.855, 2)
-// solutions belor return 35.85
+// solutions below return 35.85
 
 // Math isn't a constructor, so it doesn't have prototype property.
 // You cannot do Math.prototype.roundTo

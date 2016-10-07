@@ -43,8 +43,8 @@ console.log(   binaryAgent('01000001 01110010 01100101 01101110 00100111 0111010
 function binaryAgent2(str) {
   return str
     .split(' ')
-    .map(binaryToDecimal)
-    .map(decimalToChar)
+    .map(binaryToDecimal2)
+    .map(decimalToChar2)
     .join('');
 }
 
