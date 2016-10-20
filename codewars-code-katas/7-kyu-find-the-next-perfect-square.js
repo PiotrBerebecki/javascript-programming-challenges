@@ -1,4 +1,4 @@
-console.clear();
+// console.clear();
 
 /*
 -----------------------------------------
@@ -32,7 +32,7 @@ function findNextSquare(sq) {
 }
 // integer % 1 will always be 0 (0 remainder)
 
-console.log(findNextSquare(16));
+console.log(findNextSquare(4));
 
 
 
