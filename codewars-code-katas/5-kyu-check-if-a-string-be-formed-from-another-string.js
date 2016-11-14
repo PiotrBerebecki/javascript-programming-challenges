@@ -24,32 +24,51 @@ Performance needs to be considered
 
 // --------------------------------------
 function scramble(haystack, needle) {
-  var needleSeen = {};
+  const needleSeen = {};
   
-  for (var i = 0; i < needle.length; i++) {
-    if (needleSeen[needle[i]] === undefined) {
-      needleSeen[needle[i]] = 1;
-    } else {
-      needleSeen[needle[i]] += 1;
-    }
+  for (let i = 0; i < needle.length; i++) {
+    needleSeen[needle[i]] = needleSeen[needle[i]] >= 1 ?
+                            needleSeen[needle[i]] + 1 :
+                            1;
   }
-    
-  for (var j = 0; j < haystack.length; j++) {
+ 
+  for (let j = 0; j < haystack.length; j++) {
     if (needleSeen[haystack[j]]) {
       needleSeen[haystack[j]] -= 1;
     }
   }
   
-  for (letter in needleSeen) {
-    if (needleSeen.hasOwnProperty(letter)) {
-      if (needleSeen[letter] > 0) {
-        return false;
-      }
-    }
-  }
- 
-  return true;
+  return Object.keys(needleSeen).every(letter => needleSeen[letter] === 0);
 }
 
-console.log(  scramble('abcddd','adddd')  ); // true
+console.log(  scramble('abcddd','addd')  ); // true
 console.log(  scramble('abcd','be')  ); // false
+
+
+
+// --------------------------------------
+function scramble2(haystack, needle) {
+  const needleSeen = {};
+  
+  for (let i = 0; i < needle.length; i++) {
+    needleSeen[needle[i]] = needleSeen[needle[i]] >= 1 ?
+                            needleSeen[needle[i]] + 1 :
+                            1;
+  }
+ 
+  for (let j = 0; j < haystack.length; j++) {
+    if (needleSeen[haystack[j]]) {
+      needleSeen[haystack[j]] -= 1;
+    }
+  }
+    
+  for (var letter in needleSeen) {
+    if (needleSeen.hasOwnProperty(letter)) {
+	  if (needleSeen[letter] > 0) {
+	    return false;
+	  }
+    }
+  }
+	
+  return true;
+}
