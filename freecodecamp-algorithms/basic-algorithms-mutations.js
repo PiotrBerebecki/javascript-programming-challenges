@@ -1,4 +1,4 @@
-console.clear();
+// console.clear();
 
 /*
 -----------------------------------------
@@ -25,8 +25,8 @@ function mutation(arr) {
   var haystack = arr[0].toLowerCase();
   var needle   = arr[1].toLowerCase();
   
-  for (var i = 0, needleLen = needle.length; i < needleLen; i++) {
-    if ( !(haystack.includes(needle[i])) ) {return false;}
+  for (let i = 0, needleLen = needle.length; i < needleLen; i++) {
+    if ( !(haystack.includes(needle[i])) ) { return false; }
   }
   return true;
 }
@@ -41,7 +41,7 @@ function mutation2(arr) {
   var haystack = arr[0].toLowerCase();
   var needle   = arr[1].toLowerCase();
   
-  for (var i = 0, needleLen = needle.length; i < needleLen; i++) {
+  for (let i = 0, needleLen = needle.length; i < needleLen; i++) {
     if (haystack.indexOf(needle[i]) < 0) {return false;}
   }
   return true;
@@ -52,7 +52,7 @@ function mutation2(arr) {
 // --------------------------------------
 function mutation3(arr) {
   var temp = '';
-  for (var i = 0; i < arr[1].length; i++) {
+  for (let i = 0; i < arr[1].length; i++) {
     temp += arr[0].toLowerCase().match(arr[1].toLowerCase()[i]);
   }
   return temp === arr[1].toLowerCase();
