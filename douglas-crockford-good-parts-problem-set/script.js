@@ -1,18 +1,34 @@
 console.clear();
 
-
 // Problem set
 // Douglas Crockford - Javascritp: the Good Parts course
 // https://www.pluralsight.com/courses/javascript-good-parts
 
 
-// Reusable functions
+
+// write a function that takes an argument
+// and returns that argument.
+// console.log(  identity2(3)  );  // 3
+
+function identity(x) {
+  return x;
+}
+
+
+
+// write binary functions: add, mul, double, square
+// that take two numbers and return their the proper result.
+// console.log(  add(3,4)  );  // 7
+// console.log(  mul(3,4)  );  // 12
+
 function add(a, b) {
   return a + b;
 }
 
-function mul(a, b) {
-  return a * b;
+// add a third optional argument
+// used in the curry example below
+function mul(a, b, c) {
+  return a * b * (c ? c : 1);
 }
 
 function double(a) {
@@ -26,29 +42,9 @@ function square(a) {
 
 
 // write a function that takes an argument
-// and returns that argument.
-
-function identity(x) {
-  return x;
-}
-
-
-
-// write two binary functions, add and mul,
-// that take two numbers and return their sum and product.
-
-function add(x, y) {
-  return x + y;
-}
-
-function mul(x, y) {
-  return x * y;
-}
-
-
-
-// write a function that takes an argument
 // and returns a function that returns that argument.
+// var idf = identityf(3);  // 3
+// console.log(  idf()  );
 
 function identityf(x) {
   return function() {
@@ -59,10 +55,11 @@ function identityf(x) {
 
 
 // write a function that adds from two invocations
+// console.log(  addf(3)(4)  ); // 7
 
-function addf(x) {
-  return function(y) {
-    return add(x, y);
+function addf(a) {
+  return function(b) {
+    return add(a, b);
   };
 }
 
@@ -70,11 +67,14 @@ function addf(x) {
 
 // write a function that takes a binary function,
 // and makes it callable with two invocations.
+// var addf = applyf(add);
+// console.log(  addf(3)(4)  ) // 7
+// console.log(  applyf(mul)(5)(6)  ) // 30
 
-function applyf(f) {
-  return function(x) {
-    return function(y) {
-      return f(x, y);
+function applyf(fn) {
+  return function(a) {
+    return function(b) {
+      return fn(a, b);
     };
   };
 }
@@ -84,29 +84,62 @@ function applyf(f) {
 // write a function that takes a function and an
 // argument, and returns a function that can supply
 // a second argument.
+// var add3 = curry(add, 3);
+// console.log(  add3(4)  );  // 7
+// console.log(  curry(mul, 5)(6)  );  // 30
 
-function curry(f, x) {
-  return applyf(f)(x);
+function curry(fn, a) {
+  return function(b) {
+    return fn(a, b);
+  };
+}
+
+// reusing existing fuctions
+function curry2(fn, a) {
+  return applyf(fn)(a);
+}
+
+
+
+// Same as above but arbitary number of arguments
+// console.log(  curryMore(mul, 5)(6, 2)  );  // 60
+function curryMore(fn, a) {
+  return function(...b) {
+    return fn(a, ...b);
+  };
 }
 
 
 
 // without writing any new functions, show three ways to
 // create the inc function.
+// inc(5); // 6
+// inc(inc(5)); // 7
 
-var inc1 = applyf(add, 1);
-var inc2 = addf(1);
-var inc3 = curry(add, 1);
+// var inc = addf(1);
+// var inc = applyf(add)(1);
+// var inc = curry(add, 1);
+
+// console.log(  inc(5)  ); // 6
+// console.log(  inc(inc(5))  ); // 7
 
 
 
 // write methodize, a function that converts a binary
 // function to a method.
-// Number.prototype.add = methodize(add); -> (3).add(4)
+Number.prototype.add = methodize(add);
+// console.log(  (3).add(4)  ); // 7
 
-function methodize(binary) {
-  return function(y) {
-    return binary(this, y);
+function methodize(fn) {
+  return function(a) {
+    return fn(this, a);
+  };
+}
+
+// or allow for more arguments
+function methodize2(fn) {
+  return function(...a) {
+    return fn(this, ...a);
   };
 }
 
@@ -114,11 +147,18 @@ function methodize(binary) {
 
 // write a demothodize, a function that converts a
 // method to a binary function.
-// demethodize(Number.prototype.add)(5,6)
+// console.log(  demethodize(Number.prototype.add)(5, 6)  ) // 11
 
-function demothodize(f) {
-  return function(x, y) {
-    return f.call(x, y);
+function demethodize(fn) {
+  return function(a, b) {
+    return fn.call(a, b);
+  };
+}
+
+// or using apply
+function demethodize2(fn) {
+  return function(a, ...b) {
+    return fn.apply(a, b);
   };
 }
 
@@ -127,10 +167,15 @@ function demothodize(f) {
 // write a function twice that takes a binary function and
 // returns a unary function that passes its argument to the
 // binary function twice.
+// var double = twice(add);
+// console.log(  double(11)  );  // 22
 
-function twice(binary) {
-  return function(x) {
-    return binary(x, x);
+// var square = twice(mul);
+// console.log(  square(11)  ); // 121
+
+function twice(fn) {
+  return function(a) {
+    return fn(a, a);
   };
 }
 
@@ -138,10 +183,11 @@ function twice(binary) {
 
 // write a function composeu that takes two unary functions
 // and returns a unary function that calls then both
+// console.log(  composeu(double, square)(3)  ); // 36
 
-function composeu(f, g) {
-  return function(x) {
-    return g(f(x));
+function composeu(fn1, fn2) {
+  return function(a) {
+    return fn2(fn1(a));
   };
 }
 
@@ -149,10 +195,11 @@ function composeu(f, g) {
 
 // write a function composeb that takes two binary functions
 // and returns a function that calls them both.
+// console.log(  composeb(add, mul)(2, 3, 5)  ); // 25
 
-function composeb(f, g) {
-  return function(x, y, z) {
-    return g(f(x, y), z);
+function composeb(fn1, fn2) {
+  return function(a, b, c) {
+    return fn2(fn1(a, b), c);
   };
 }
 
@@ -160,37 +207,50 @@ function composeb(f, g) {
 
 // write a function that allows another function to only be called one.
 // add_once = once(add);
-// add_once(3, 4) -> 7
-// add_once(3, 4) -> throw!
+// console.log(  add_once(3, 4)  ); //  7
+// console.log(  add_once(3, 4)  ); //  throw!
 
+
+// or
 function once(fn) {
-  var wasCalled = false;
-  
-  return function(a,b) {
-    if (wasCalled === false) {
-      wasCalled = true;
-      return fn(a,b);
-    }
-    throw new Error('Already called');
-  }
-}
-
-
-function once2(fn) {
   return function() {
     var fnNew = fn;
     fn = null;
-    return fnNew.apply(this, arguments);
-  }
+    return fnNew.apply(null, arguments);
+  };
+}
+
+
+// or
+function once2(fn) {
+  var wasCalled = false;
+  
+  return function(a, b) {
+    if (wasCalled === false) {
+      wasCalled = true;
+      return fn(a, b);
+    }
+    throw new Error('Already called');
+  };
+}
+
+
+// or
+function once3(fn) {
+  return function(a, b) {
+    var fnNew = fn;
+    fn = null;
+    return fnNew.call(null, a, b);
+  };
 }
 
 
 
 // write a factory function that returns two functions
 // that implement an up/down counter.
-// counter = counterf(10);
-// counter.inc() -> 11
-// counter.dec() -> 10
+// var counter = counterf(10);
+// console.log(  counter.inc()  ) // 11
+// console.log(  counter.dec()  ) // 10
 
 function counterf(num) {
   return {
@@ -205,6 +265,7 @@ function counterf(num) {
   };
 }
 
+// or
 function counterf2(num) {
   return {
     inc: function() {
@@ -222,8 +283,7 @@ function counterf2(num) {
 var temp = revocable(square);
 console.log(  temp.invoke(3)  ); // 9
 console.log(  temp.revoke()  );
-console.log(  temp.revoke(4)  );
-
+console.log(  temp.revoke(4)  ); // throw!
 
 function revocable(fn) {
   return {
@@ -233,10 +293,10 @@ function revocable(fn) {
     revoke: function() {
       return fn = null;
     }
-  }
+  };
 }
 
-
+// or
 function revocable2(fn) {
   return {
     invoke: function() {
@@ -245,5 +305,5 @@ function revocable2(fn) {
     revoke: function() {
       return fn = null;
     }
-  }
+  };
 }
