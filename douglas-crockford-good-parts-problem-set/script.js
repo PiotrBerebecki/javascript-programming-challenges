@@ -1,6 +1,3 @@
-console.log('alive');
-
-
 console.clear();
 
 
