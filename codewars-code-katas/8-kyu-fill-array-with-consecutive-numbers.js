@@ -9,3 +9,12 @@ function monkeyCount(n) {
 function monkeyCount2(n) {
   return Array.from(new Array(n), (_, idx) => idx + 1);
 }
+
+function unique(array) {
+  return numbers.reduce((acc, num) => {
+    if (!acc.includes(num)) {
+      acc = [...acc, num];
+    }
+    return acc;
+  }, []);
+}
