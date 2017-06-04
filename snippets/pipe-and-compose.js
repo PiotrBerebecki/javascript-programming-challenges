@@ -1,4 +1,4 @@
-const addThree = (a, b, c) => a + b + c;
+const sumThree = (a, b, c) => a + b + c;
 const dbl = a => a * 2;
 const toCurrency = num => `£${num}`;
 
@@ -14,8 +14,8 @@ const pipe = (...fns) => fns.reduce(_pipe);
 const pipe = (fnFirst, ...fns) => (...args) =>
   fns.reduce((acc, fn) => fn(acc), fnFirst(...args));
 
-const addThreeAndDouble = pipe(addThree, dbl)(1, 2, 3);
-console.log(addThreeAndDouble); // 12
+const sumThreeAndDouble = pipe(sumThree, dbl)(1, 2, 3);
+console.log(sumThreeAndDouble); // 12
 
 // ****************************************************************
 // compose
@@ -29,5 +29,5 @@ const compose = (...fns) => fns.reduce(_compose);
 const compose = (...fns) => (...args) =>
   fns.slice(0, -1).reduceRight((acc, fn) => fn(acc), fns.slice(-1)[0](...args));
 
-const addThreeAndToCurrency = compose(toCurrency, addThree)(1, 2, 3);
-console.log(addThreeAndToCurrency); // £6
+const sumThreeAndToCurrency = compose(toCurrency, sumThree)(1, 2, 3);
+console.log(sumThreeAndToCurrency); // £6
