@@ -7,12 +7,12 @@ function daysInMonth(y, m) {
   return (end - start) / (1000 * 60 * 60 * 24);
 }
 
-console.log( daysInMonth(2017, 2 ));
+console.log( daysInMonth(2017, 2) );
 
 // the above is much easier to test than the below
 // which relies on time
 
-function daysThisMonth2() {
+function daysThisMonth() {
   var date  = new Date(),
     y     = date.getFullYear(),
     m     = date.getMonth(),
