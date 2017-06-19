@@ -4,17 +4,13 @@ console.clear();
 // Douglas Crockford - Javascritp: the Good Parts course
 // https://www.pluralsight.com/courses/javascript-good-parts
 
-
-
 // write a function that takes an argument
 // and returns that argument.
-// console.log(  identity2(3)  );  // 3
+// console.log(  identity(3)  );  // 3
 
 function identity(x) {
   return x;
 }
-
-
 
 // write binary functions: add, mul, double, square
 // that take two numbers and return their the proper result.
@@ -39,8 +35,6 @@ function square(a) {
   return a * a;
 }
 
-
-
 // write a function that takes an argument
 // and returns a function that returns that argument.
 // var idf = identityf(3);  // 3
@@ -52,8 +46,6 @@ function identityf(x) {
   };
 }
 
-
-
 // write a function that adds from two invocations
 // console.log(  addf(3)(4)  ); // 7
 
@@ -62,8 +54,6 @@ function addf(a) {
     return add(a, b);
   };
 }
-
-
 
 // write a function that takes a binary function,
 // and makes it callable with two invocations.
@@ -78,8 +68,6 @@ function applyf(fn) {
     };
   };
 }
-
-
 
 // write a function that takes a function and an
 // argument, and returns a function that can supply
@@ -99,8 +87,6 @@ function curry2(fn, a) {
   return applyf(fn)(a);
 }
 
-
-
 // Same as above but arbitary number of arguments
 // console.log(  curryMore(mul, 5)(6, 2)  );  // 60
 function curryMore(fn, a) {
@@ -108,8 +94,6 @@ function curryMore(fn, a) {
     return fn(a, ...b);
   };
 }
-
-
 
 // without writing any new functions, show three ways to
 // create the inc function.
@@ -122,8 +106,6 @@ function curryMore(fn, a) {
 
 // console.log(  inc(5)  ); // 6
 // console.log(  inc(inc(5))  ); // 7
-
-
 
 // write methodize, a function that converts a binary
 // function to a method.
@@ -143,8 +125,6 @@ function methodize2(fn) {
   };
 }
 
-
-
 // write a demothodize, a function that converts a
 // method to a binary function.
 // console.log(  demethodize(Number.prototype.add)(5, 6)  ) // 11
@@ -162,8 +142,6 @@ function demethodize2(fn) {
   };
 }
 
-
-
 // write a function twice that takes a binary function and
 // returns a unary function that passes its argument to the
 // binary function twice.
@@ -179,8 +157,6 @@ function twice(fn) {
   };
 }
 
-
-
 // write a function composeu that takes two unary functions
 // and returns a unary function that calls then both
 // console.log(  composeu(double, square)(3)  ); // 36
@@ -190,8 +166,6 @@ function composeu(fn1, fn2) {
     return fn2(fn1(a));
   };
 }
-
-
 
 // write a function composeb that takes two binary functions
 // and returns a function that calls them both.
@@ -203,13 +177,10 @@ function composeb(fn1, fn2) {
   };
 }
 
-
-
 // write a function that allows another function to only be called one.
 // add_once = once(add);
 // console.log(  add_once(3, 4)  ); //  7
 // console.log(  add_once(3, 4)  ); //  throw!
-
 
 // or
 function once(fn) {
@@ -220,11 +191,10 @@ function once(fn) {
   };
 }
 
-
 // or
 function once2(fn) {
   var wasCalled = false;
-  
+
   return function(a, b) {
     if (wasCalled === false) {
       wasCalled = true;
@@ -234,7 +204,6 @@ function once2(fn) {
   };
 }
 
-
 // or
 function once3(fn) {
   return function(a, b) {
@@ -243,8 +212,6 @@ function once3(fn) {
     return fnNew.call(null, a, b);
   };
 }
-
-
 
 // write a factory function that returns two functions
 // that implement an up/down counter.
@@ -261,7 +228,7 @@ function counterf(num) {
     dec: function() {
       num -= 1;
       return num;
-    }
+    },
   };
 }
 
@@ -273,17 +240,15 @@ function counterf2(num) {
     },
     dec: function() {
       return ++num;
-    }
+    },
   };
 }
 
-
-
 // write a revocable function that allows you to do something like:
 var temp = revocable(square);
-console.log(  temp.invoke(3)  ); // 9
-console.log(  temp.revoke()  );
-console.log(  temp.revoke(4)  ); // throw!
+console.log(temp.invoke(3)); // 9
+console.log(temp.revoke());
+console.log(temp.revoke(4)); // throw!
 
 function revocable(fn) {
   return {
@@ -291,8 +256,8 @@ function revocable(fn) {
       return fn.apply(this, arguments);
     },
     revoke: function() {
-      return fn = null;
-    }
+      return (fn = null);
+    },
   };
 }
 
@@ -303,7 +268,7 @@ function revocable2(fn) {
       return fn(...arguments);
     },
     revoke: function() {
-      return fn = null;
-    }
+      return (fn = null);
+    },
   };
 }
