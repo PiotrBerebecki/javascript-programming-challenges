@@ -1,4 +1,3 @@
-// https://codepen.io/PiotrBerebecki/pen/zzvNeG?editors=0010
 // calculate days in the current month
 
 function daysInMonth(y, m) {
