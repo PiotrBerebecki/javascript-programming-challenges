@@ -30,12 +30,12 @@ const square = a => a * a;
 // console.log(  mul(3,4)  );  // 12
 
 // *******************************************************************
-// var idf = identityf(3);
+// const idf = identityf(3);
 // console.log(  idf()  );  // 3
 
 const identityf = x => () => x;
 
-// var idf = identityf(3);
+// const idf = identityf(3);
 // console.log(  idf()  );  // 3
 
 // *******************************************************************
@@ -64,63 +64,63 @@ const curry = (fn, ...args) => {
 
 // *******************************************************************
 // Write a curry reverse function
-// var sub3 = curryr(sub, 3);
+// const sub3 = curryr(sub, 3);
 // console.log(  sub3(11)  );  // 8
 // console.log(  sub3(3)   );  // 0
 
 const curryr = (fn, b) => a => fn(a, b);
 
-// var sub3 = curryr(sub, 3);
+// const sub3 = curryr(sub, 3);
 // console.log(  sub3(11)  );  // 8
 // console.log(  sub3(3)   );  // 0
 
 // *******************************************************************
-// var addFn = liftFn(add);
+// const addFn = liftFn(add);
 // console.log(  addFn(3)(4)  );        // 7
 // console.log(  liftFn(mul)(5)(6)  );  // 11
 
 // const liftFn = fn => curry(fn)
 const liftFn = fn => a => b => fn(a, b);
 
-// var addFn = liftFn(add);
+// const addFn = liftFn(add);
 // console.log(  addFn(3)(4)  );        // 7
 // console.log(  liftFn(mul)(5)(6)  );  // 11
 
 // *******************************************************************
 // find four ways to make inc function
-// var inc = ?????;
+// const inc = ?????;
 // console.log(  inc(5)  );       // 6
 // console.log(  inc(inc(5))  );  // 7
 
-var inc = curry(add, 1);
-// var inc = curryr(add, 1);
-// var inc = addf(1);
-// var inc = liftFn(add)(1);
+const inc = curry(add, 1);
+// const inc = curryr(add, 1);
+// const inc = addf(1);
+// const inc = liftFn(add)(1);
 
 // console.log(  inc(5)  );       // 6
 // console.log(  inc(inc(5))  );  // 7
 
 // *******************************************************************
-// var doubl = twice(add);
+// const doubl = twice(add);
 // console.log( doubl(11)  );     // 22
-// var sq = twice(mul);
+// const sq = twice(mul);
 // console.log( sq(11)  );    // 121
 
 const twice = fn => n => fn(n, n);
 
-// var doubl = twice(add);
+// const doubl = twice(add);
 // console.log( doubl(11)  );     // 22
-// var sq = twice(mul);
+// const sq = twice(mul);
 // console.log( sq(11)  );    // 121
 
 // *******************************************************************
-// var bus = reverse(sub);
+// const bus = reverse(sub);
 // console.log(  bus(3, 2)  );    // -1
 
 const reverse = fn => (a, b) => fn(b, a);
 // const reverse = fn => (...args) => fn(...args.reverse());
 
-// var bus = reverse(sub);
+// const bus = reverse(sub);
 // console.log(  bus(3, 2)  );    // -1
 
 // *******************************************************************
@@ -527,26 +527,114 @@ const revocable = fn => {
 // rev.revoke();
 // console.log(add_rev(5, 7)); // undefined
 // *******************************************************************
-// Write a constructor m that takes a value
+// Write a constructor toObject that takes a value
 // and an optional source string and returns
-// them in an object. Both values should be strings.
+// them in an object. The value of source should be a string.
 
-// console.log(JSON.stringify(m(1)));
-// // {"value": 1, "source": "1"}
-// console.log(JSON.stringify(m(Math.PI, 'pi')));
-// // {"value": 3.14159…, "source": "pi"}
+// console.log(JSON.stringify(toObject(1))); // {"value": 1, "source": "1"}
+// console.log(JSON.stringify(toObject(Math.PI, 'pi'))); // {"value": 3.14159…, "source": "pi"}
 
-const m = (value, source) => {
+const toObject = (value, source) => {
   return {
     value,
     source: source ? source : String(value),
   };
 };
 
-console.log(JSON.stringify(m(1)));
-// {"value": 1, "source": "1"}
-console.log(JSON.stringify(m(Math.PI, 'pi')));
-// {"value": 3.14159…, "source": "pi"}
+// console.log(JSON.stringify(toObject(1))); // {"value": 1, "source": "1"}
+// console.log(JSON.stringify(toObject(Math.PI, 'pi'))); // {"value": 3.14159…, "source": "pi"}
+
+// *******************************************************************
+// Write a function addObjects that takes two m objects and returns an m object.
+
+// console.log(JSON.stringify(addObjects(toObject(3), toObject(4)))); // {"value": 7, "source": "(3+4)"}
+// console.log(JSON.stringify(addObjects(toObject(1), toObject(Math.PI, 'pi')))); // {"value": 4.14159…, "source": "(1+pi)"}
+
+const addObjects = (o1, o2) => {
+  return toObject(o1.value + o2.value, `(${o1.source}+${o2.source})`);
+};
+
+// console.log(JSON.stringify(addObjects(toObject(3), toObject(4)))); // {"value": 7, "source": "(3+4)"}
+// console.log(JSON.stringify(addObjects(toObject(1), toObject(Math.PI, 'pi')))); // {"value": 4.14159…, "source": "(1+pi)"}
+
+// *******************************************************************
+// Write a function liftm that takes a binary function
+// and a string and returns a function that acts on m objects.
+
+// const addTwo = operation(add, '+');
+// console.log(JSON.stringify(addTwo(toObject(3), toObject(4))));
+// // {"value": 7, "source": "(3+4)"}
+// const mulTwo = operation(mul, '*');
+// console.log(JSON.stringify(mulTwo(toObject(3), toObject(4))));
+// // {"value": 12, "source": "(3*4)"}
+
+const operation = (fn, operator) => {
+  return (obj1, obj2) => {
+    return toObject(
+      fn(obj1.value, obj2.value),
+      `(${obj1.source}${operator}${obj2.source})`
+    );
+  };
+};
+
+// const addTwo = operation(add, '+');
+// console.log(JSON.stringify(addTwo(toObject(3), toObject(4))));
+// // {"value": 7, "source": "(3+4)"}
+// const mulTwo = operation(mul, '*');
+// console.log(JSON.stringify(mulTwo(toObject(3), toObject(4))));
+// // {"value": 12, "source": "(3*4)"}
+
+// *******************************************************************
+// Modify function operation so that the functions it produces
+// can accept arguments that are either numbers or `toObject` objects.
+
+// const addNice = operationPro(add, '+');
+// console.log(JSON.stringify(addNice(toObject(3), 4)));
+// // {"value": 7, "source": "(3+4)"}
+
+const operationPro = (fn, operator) => {
+  return (a, b) => {
+    if (typeof a === 'number') {
+      a = toObject(a);
+    }
+    if (typeof b === 'number') {
+      b = toObject(b);
+    }
+    return toObject(
+      fn(a.value, b.value),
+      `(${a.source}${operator}${b.source})`
+    );
+  };
+};
+
+// const addNice = operationPro(add, '+');
+// console.log(JSON.stringify(addNice(toObject(3), 4)));
+// // {"value": 7, "source": "(3+4)"}
+
+// *******************************************************************
+// const array = [];
+// repeat(collect(fromTo(0, 4), array));
+// console.log(array); // [0, 1, 2, 3]
+
+const repeat = gen => {
+  let next = null;
+  while (next !== undefined) {
+    next = gen();
+  }
+};
+
+// const array = [];
+// repeat(collect(fromTo(0, 4), array));
+// console.log(array); // [0, 1, 2, 3]
+
+// *******************************************************************
+
+// const map = (arr, fn) => {
+//   // return arr.map(el => fn(el));
+//   return arr.map(fn);
+// };
+//
+// console.log(map([2, 1, 0], inc)); // [3, 2, 1]
 
 // *******************************************************************
 
@@ -558,6 +646,32 @@ console.log(JSON.stringify(m(Math.PI, 'pi')));
 
 // *******************************************************************
 
+// *******************************************************************
+
+// *******************************************************************
+
+// *******************************************************************
+
+// *******************************************************************
+
+// *******************************************************************
+
+// *******************************************************************
+
+// *******************************************************************
+//
+// *******************************************************************
+
+// *******************************************************************
+
+// *******************************************************************
+
+// *******************************************************************
+
+// *******************************************************************
+
+// *******************************************************************
+//
 // *******************************************************************
 
 // *******************************************************************
