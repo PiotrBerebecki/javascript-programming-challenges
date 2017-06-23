@@ -141,7 +141,7 @@ const composeb = (fn1, fn2) => (a, b, c) => fn2(fn1(a, b), c);
 // console.log(  composeb(add, mul)(2, 3, 7)  );    // 35
 
 // *******************************************************************
-// var add_ltd = limit(add, 1);
+// const add_ltd = limit(add, 1);
 // console.log(  add_ltd(3, 4)  );    // 7
 // console.log(  add_ltd(3, 5) );    // undefined
 
@@ -156,19 +156,19 @@ const limit = (fn, limit) => {
   };
 };
 
-// var add_ltd = limit(add, 1);
+// const add_ltd = limit(add, 1);
 // console.log(  add_ltd(3, 4)  );   // 7
 // console.log(  add_ltd(3, 5) );    // undefined
 
 // *******************************************************************
-// var gen = from(0);
+// const gen = from(0);
 // console.log(  gen()  );    // 0
 // console.log(  gen()  );    // 1
 // console.log(  gen()  );    // 2
 
 const from = n => () => n++;
 
-// var gen = from(0);
+// const gen = from(0);
 // console.log(  gen()  );    // 0
 // console.log(  gen()  );    // 1
 // console.log(  gen()  );    // 2
@@ -384,23 +384,23 @@ const concatPro = (...gens) => {
 // console.log(gen()); // undefined
 
 // *******************************************************************
-// Make a factory gensymf that makes generators that make unique symbols.
+// Make a factory genSym that makes generators that make unique symbols.
 
-// const geng = gensymf('G');
-// const genh = gensymf('H');
+// const geng = genSym('G');
+// const genh = genSym('H');
 // console.log(geng()); // "G1"
 // console.log(genh()); // "H1"
 // console.log(geng()); // "G2"
 // console.log(genh()); // "H2"
 
-const gensymf = prefix => {
+const genSym = prefix => {
   const gen = from(1);
   return () => {
     return prefix + gen();
   };
 };
 
-// const gensymf2 = prefix => {
+// const genSym2 = prefix => {
 //   const ids = {};
 //
 //   return () => {
@@ -409,17 +409,61 @@ const gensymf = prefix => {
 //   };
 // };
 
-const geng = gensymf('G');
-const genh = gensymf('H');
-console.log(geng()); // "G1"
-console.log(genh()); // "H1"
-console.log(geng()); // "G2"
-console.log(genh()); // "H2"
+// const geng = genSym('G');
+// const genh = genSym('H');
+// console.log(geng()); // "G1"
+// console.log(genh()); // "H1"
+// console.log(geng()); // "G2"
+// console.log(genh()); // "H2"
 
 // *******************************************************************
+// Make a factory factory gensymff that takes a seed and returns a factory.
+
+const genSymFromSeed = seed => {
+  return prefix => {
+    const gen = from(seed);
+    return () => {
+      return prefix + gen();
+    };
+  };
+};
+
+// const genSymFromOne = genSymFromSeed(1);
+// const geng = genSymFromOne('G');
+// const genh = genSymFromOne('H');
+// console.log(geng()); // "G1"
+// console.log(genh()); // "H1"
+// console.log(geng()); // "G2"
+// console.log(genh()); // "H2"
 
 // *******************************************************************
+// Make a function fibonaccif that returns a generator that will
+// return the next fibonacci number.
 
+// const fib = fibonacci(0, 1);
+// console.log(fib()); // 0
+// console.log(fib()); // 1
+// console.log(fib()); // 1
+// console.log(fib()); // 2
+// console.log(fib()); // 3
+// console.log(fib()); // 5
+
+const fibonacci = (a, b) => {
+  return () => {
+    const next = a;
+    a = b;
+    b = b + next;
+    return next;
+  };
+};
+
+const fib = fibonacci(0, 1);
+console.log(fib()); // 0
+console.log(fib()); // 1
+console.log(fib()); // 1
+console.log(fib()); // 2
+console.log(fib()); // 3
+console.log(fib()); // 5
 // *******************************************************************
 
 // *******************************************************************
