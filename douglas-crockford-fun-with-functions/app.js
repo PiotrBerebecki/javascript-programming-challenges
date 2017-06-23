@@ -348,57 +348,73 @@ const concat = (gen1, gen2) => {
 // *******************************************************************
 // Same as above but arbitrary number of parameters
 
-// const gen = concat(fromTo(0, 3), fromTo(0, 2));
+// const gen = concatPro(fromTo(0, 3), fromTo(0, 2), fromTo(4, 6));
 // console.log(gen()); // 0
 // console.log(gen()); // 1
 // console.log(gen()); // 2
 // console.log(gen()); // 0
 // console.log(gen()); // 1
+// console.log(gen()); // 4
+// console.log(gen()); // 5
 // console.log(gen()); // undefined
 
-// const concatPro = (...gens) => {
-//   let genIdx = 0;
-//   return () => {
-//     let next = gens[genIdx]();
-//     if (next === undefined) {
-//       genIdx++;
-//       if (gens[genIdx]) {
-//         return gens[genIdx]();
-//       }
-//     }
-//
-//     return next;
-//   };
-// };
-
-// const concatPro = (...gens) => {
-//   let next = elementPro(gens);
-//   return () => {
-//     return next()();
-//   };
-// };
-
-// const elementPro = (arr, gen) => {
-//   if (gen === undefined) {
-//     gen = fromTo(0, arr.length);
-//   }
-//
-//   return () => {
-//     return arr[gen()];
-//   };
-// };
+const concatPro = (...gens) => {
+  const next = elementPro(gens);
+  let gen = next();
+  return function recur() {
+    const value = gen();
+    if (value === undefined) {
+      gen = next();
+      if (gen !== undefined) {
+        return recur();
+      }
+    }
+    return value;
+  };
+};
 
 // const gen = concatPro(fromTo(0, 3), fromTo(0, 2), fromTo(4, 6));
-console.log(gen()); // 0
-console.log(gen()); // 1
-console.log(gen()); // 2
-console.log(gen()); // 0
-console.log(gen()); // 1
-console.log(gen()); // 4
-console.log(gen()); // 5
-console.log(gen()); // undefined
+// console.log(gen()); // 0
+// console.log(gen()); // 1
+// console.log(gen()); // 2
+// console.log(gen()); // 0
+// console.log(gen()); // 1
+// console.log(gen()); // 4
+// console.log(gen()); // 5
+// console.log(gen()); // undefined
 
 // *******************************************************************
+// Make a factory gensymf that makes generators that make unique symbols.
+
+// const geng = gensymf('G');
+// const genh = gensymf('H');
+// console.log(geng()); // "G1"
+// console.log(genh()); // "H1"
+// console.log(geng()); // "G2"
+// console.log(genh()); // "H2"
+
+const gensymf = prefix => {
+  const gen = from(1);
+  return () => {
+    return prefix + gen();
+  };
+};
+
+// const gensymf2 = prefix => {
+//   const ids = {};
+//
+//   return () => {
+//     ids[prefix] = ids[prefix] ? ids[prefix] + 1 : 1;
+//     return `${prefix}${ids[prefix]}`;
+//   };
+// };
+
+const geng = gensymf('G');
+const genh = gensymf('H');
+console.log(geng()); // "G1"
+console.log(genh()); // "H1"
+console.log(geng()); // "G2"
+console.log(genh()); // "H2"
 
 // *******************************************************************
 
