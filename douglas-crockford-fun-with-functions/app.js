@@ -487,18 +487,66 @@ const counter = () => {
   return { up, down };
 };
 
-const object = counter();
-const up = object.up;
-const down = object.down;
-console.log(up()); // 1
-console.log(down()); // 0
-console.log(counter.count); // undefined
-console.log(down()); // -1
-console.log(up()); // 0
+// const object = counter();
+// const up = object.up;
+// const down = object.down;
+// console.log(up()); // 1
+// console.log(down()); // 0
+// console.log(counter.count); // undefined
+// console.log(down()); // -1
+// console.log(up()); // 0
 
 // *******************************************************************
+// Make a revocable constructor that takes a binary function,
+// and returns an object containing an invoke function
+// that can invoke the binary function, and a revoke function
+// that disables the invoke function.
+// const rev = revocable(add);
+// const add_rev = rev.invoke;
+// console.log(add_rev(3, 4)); // 7
+// rev.revoke();
+// console.log(add_rev(5, 7)); // undefined
 
+const revocable = fn => {
+  function invoke(a, b) {
+    if (fn) {
+      return fn(a, b);
+    }
+  }
+
+  function revoke() {
+    fn = null;
+  }
+
+  return { invoke, revoke };
+};
+
+// const rev = revocable(add);
+// const add_rev = rev.invoke;
+// console.log(add_rev(3, 4)); // 7
+// rev.revoke();
+// console.log(add_rev(5, 7)); // undefined
 // *******************************************************************
+// Write a constructor m that takes a value
+// and an optional source string and returns
+// them in an object. Both values should be strings.
+
+// console.log(JSON.stringify(m(1)));
+// // {"value": 1, "source": "1"}
+// console.log(JSON.stringify(m(Math.PI, 'pi')));
+// // {"value": 3.14159…, "source": "pi"}
+
+const m = (value, source) => {
+  return {
+    value,
+    source: source ? source : String(value),
+  };
+};
+
+console.log(JSON.stringify(m(1)));
+// {"value": 1, "source": "1"}
+console.log(JSON.stringify(m(Math.PI, 'pi')));
+// {"value": 3.14159…, "source": "pi"}
 
 // *******************************************************************
 
