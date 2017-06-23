@@ -457,14 +457,44 @@ const fibonacci = (a, b) => {
   };
 };
 
-const fib = fibonacci(0, 1);
-console.log(fib()); // 0
-console.log(fib()); // 1
-console.log(fib()); // 1
-console.log(fib()); // 2
-console.log(fib()); // 3
-console.log(fib()); // 5
+// const fib = fibonacci(0, 1);
+// console.log(fib()); // 0
+// console.log(fib()); // 1
+// console.log(fib()); // 1
+// console.log(fib()); // 2
+// console.log(fib()); // 3
+// console.log(fib()); // 5
+
 // *******************************************************************
+// const object = counter();
+// const up = object.up;
+// const down = object.down;
+// console.log(up()); // 1
+// console.log(down()); // 0
+// console.log(counter.count); // undefined
+// console.log(down()); // -1
+// console.log(up()); // 0
+
+const counter = () => {
+  let count = 0;
+
+  function up() {
+    return ++count;
+  }
+  function down() {
+    return --count;
+  }
+  return { up, down };
+};
+
+const object = counter();
+const up = object.up;
+const down = object.down;
+console.log(up()); // 1
+console.log(down()); // 0
+console.log(counter.count); // undefined
+console.log(down()); // -1
+console.log(up()); // 0
 
 // *******************************************************************
 
