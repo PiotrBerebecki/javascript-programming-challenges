@@ -1,4 +1,4 @@
-console.clear();
+aconsole.clear();
 
 // *******************************************************************
 // write a function that takes an argument
