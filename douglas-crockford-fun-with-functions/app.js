@@ -1,4 +1,4 @@
-aconsole.clear();
+console.clear();
 
 // *******************************************************************
 // write a function that takes an argument
@@ -628,15 +628,147 @@ const repeat = gen => {
 // console.log(array); // [0, 1, 2, 3]
 
 // *******************************************************************
+// Use the repeat function in the below
+// console.log(map([2, 1, 0], inc)); // [3, 2, 1]
 
-// const map = (arr, fn) => {
-//   // return arr.map(el => fn(el));
-//   return arr.map(fn);
-// };
-//
+function map(array, unary) {
+  var ele = elementPro(array);
+  var result = [];
+  repeat(
+    collect(function() {
+      var value = ele();
+      if (value !== undefined) {
+        return unary(value);
+      }
+    }, result)
+  );
+  return result;
+}
+
 // console.log(map([2, 1, 0], inc)); // [3, 2, 1]
 
 // *******************************************************************
+// Use the repeat function in the below
+// console.log(reduce([], add)); // undefined
+// console.log(reduce([2], add)); // 2
+// console.log(reduce([2, 1, 0], add)); // 3
+
+function reduce(array, binary) {
+  var ele = elementPro(array);
+  var result;
+  repeat(function() {
+    var value = ele();
+    if (value !== undefined) {
+      result = result === undefined ? value : binary(result, value);
+    }
+    return value;
+  });
+  return result;
+}
+
+// console.log(reduce([], add)); // undefined
+// console.log(reduce([2], add)); // 2
+// console.log(reduce([2, 1, 0], add)); // 3
+
+// *******************************************************************
+// Write a function exp that evaluates simple array expressions.
+// const sae = [mul, 5, 11];
+// console.log(expLight(sae));    // 55
+// console.log(expLight(42));     // 42
+
+const expLight = value => {
+  return Array.isArray(value) ? value[0](value[1], value[2]) : value;
+};
+
+// const sae = [mul, 5, 11];
+// console.log(expLight(sae)); // 55
+// console.log(expLight(42)); // 42
+
+// *******************************************************************
+// Modify exp to evaluate nested array expressions.
+// const nae = [Math.sqrt, [add, [square, 3], [square, 4]]];
+// console.log(exp(nae)); // 5
+
+// const nae = [
+//     Math.sqrt,
+//     [
+//         add,
+//         [square, 3],
+//         [square, 4]
+//     ]
+// ];
+// exp(nae)    // 5
+
+const exp = value => {
+  return Array.isArray(value) ? value[0](exp(value[1]), exp(value[2])) : value;
+};
+
+// const nae = [Math.sqrt, [add, [square, 3], [square, 4]]];
+// console.log(exp(nae)); // 5
+
+// *******************************************************************
+// Write a function addg that adds from many invocations,
+// until it sees an empty invocation.
+
+// console.log(addg()); // undefined
+// console.log(addg(2)()); // 2
+// console.log(addg(2)(7)()); // 9
+// console.log(addg(3)(0)(4)()); // 7
+// console.log(addg(1)(2)(4)(8)()); // 15
+
+const addg = num => {
+  if (num === undefined) {
+    return undefined;
+  }
+  return nextNum => {
+    if (nextNum === undefined) {
+      return num;
+    }
+    return addg(num + nextNum);
+  };
+};
+
+// const addg = num =>
+//   num === undefined
+//     ? undefined
+//     : nextNum => (nextNum === undefined ? num : addg(num + nextNum));
+
+// console.log(addg()); // undefined
+// console.log(addg(2)()); // 2
+// console.log(addg(2)(7)()); // 9
+// console.log(addg(3)(0)(4)()); // 7
+// console.log(addg(1)(2)(4)(8)()); // 15
+
+// *******************************************************************
+// Write a function addg that adds from many invocations,
+// until it sees an empty invocation.
+
+// console.log(iftg(mul)()); // undefined
+// console.log(iftg(mul)(3)()); // 3
+// console.log(iftg(mul)(3)(2)()); // 6
+// console.log(iftg(mul)(3)(0)(4)()); // 0
+// console.log(iftg(mul)(1)(2)(4)(8)()); // 64
+
+const iftg = fn => {
+  return function inner(num) {
+    if (num === undefined) {
+      return undefined;
+    }
+    return nextNum => {
+      if (nextNum === undefined) {
+        return num;
+      }
+      return inner(fn(num, nextNum));
+    };
+  };
+};
+
+// console.log(iftg(mul)()); // undefined
+// console.log(iftg(mul)(3)()); // 3
+// console.log(iftg(mul)(3)(2)()); // 6
+// console.log(iftg(mul)(3)(0)(4)()); // 0
+// console.log(iftg(mul)(1)(2)(4)(8)()); // 64
+// *******************************************************************
 
 // *******************************************************************
 
@@ -659,19 +791,9 @@ const repeat = gen => {
 // *******************************************************************
 
 // *******************************************************************
-//
-// *******************************************************************
 
 // *******************************************************************
 
-// *******************************************************************
-
-// *******************************************************************
-
-// *******************************************************************
-
-// *******************************************************************
-//
 // *******************************************************************
 
 // *******************************************************************
