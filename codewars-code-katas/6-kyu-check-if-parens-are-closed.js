@@ -1,4 +1,5 @@
 // http://www.codewars.com/kata/checking-groups/javascript
+// Check valid parens, curly braces, brackets.
 // Your job in this kata will be to make a program that checks a string for correct grouping. For instance, the following groups are done correctly:
 
 // ({})
