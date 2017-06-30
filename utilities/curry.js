@@ -18,7 +18,7 @@ const curry = (fn, ...args) => {
 
 // ES6 bind 'tiny'
 const curry = (fn, ...args) =>
-  (fn.length === args.length ? fn(...args) : curry.bind(null, fn, ...args));
+  fn.length === args.length ? fn(...args) : curry.bind(null, fn, ...args);
 
 // ES6 apply
 const curry = (fn, ...args) => {
@@ -39,6 +39,12 @@ const curry = (fn, ...args) => {
     return curry.call(null, fn, ...args, ...nextArgs);
   };
 };
+
+// without call, apply, bins
+const curry = (fn, ...args) =>
+  fn.length === args.length
+    ? fn(...args)
+    : (...argsNext) => curry(fn, ...args, ...argsNext);
 
 // ES5
 function curry(fn, args) {
