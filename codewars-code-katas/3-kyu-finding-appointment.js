@@ -2,7 +2,7 @@ console.clear();
 
 // http://www.codewars.com/kata/finding-an-appointment/javascript
 
-// Find the earliest time for a meeting.
+// Find the earliest time for a meeting / appointment
 
 const getStartTime = (schedules, duration) => {
   const dayStartMin = 9 * 60; // 9:00
@@ -41,6 +41,8 @@ const getStartTime = (schedules, duration) => {
     });
   });
 
+  // loop through all minutes in a day
+  // and return the first suitable minute
   for (let min = dayStartMin; min < dayEndMin; min++) {
     if (
       freeSlots.every(per => {
