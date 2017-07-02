@@ -1,7 +1,3 @@
-console.clear();
-
-// https://www.codewars.com/kata/deep-assignment/solutions
-
 // var obj = {};
 // var str = 'asdf[0][1][1].sss.ddd';
 // var value = 2;
