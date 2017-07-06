@@ -133,11 +133,14 @@
 
 2.  `debounce` - Implement the [debounce](https://lodash.com/docs/4.17.4#debounce) function.
 
-        let a = () => console.log('foo')
-        let b = debounce(a, 100)
-        b()
-        b()
-        b() // only this call should invoke a()
+        const hello = (name, day) => {
+          console.log('My name is', name, 'Today is', day);
+        };
+
+        const handler = debounce(hello, 100);
+        handler('Bob', 'Monday');
+        handler('Bob', 'Tuesday');
+        handler('Bob', 'Wednesday'); // only this call should invoke hello
 
 3.  `seq` - Resolve an array of promises in sequence (as opposed to [`Promise.all`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise/all), which does it in parallel).
 
