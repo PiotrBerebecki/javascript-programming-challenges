@@ -94,21 +94,14 @@ const includes = (arr, n) => {
 // console.log(includes([1, 3, 8, 8, 15], 15)); // true
 // console.log(includes([1, 3, 8, 10, 15], 9)); // false
 
-// TODO
 const assignDeep = (target, source) => {
-  // loop throug keys in source
   for (let key in source) {
-    // if source is object
     if (isObject(source[key])) {
-      // if target is not object
       if (!isObject(target[key])) {
-        // create object on target
         target[key] = {};
       }
-      // recursively merge target and source on key
-      assignDeep(target[key], source[key]);
+      target[key] = assignDeep(target[key], source[key]);
     } else {
-      // if source is not object, then just overwrite target
       target[key] = source[key];
     }
   }
@@ -116,10 +109,9 @@ const assignDeep = (target, source) => {
   return target;
 };
 
-function isObject(a) {
-  return Object.prototype.toString.call(a) === '[object Object]';
+function isObject(v) {
+  return Object.prototype.toString.call(v) === '[object Object]';
 }
-//
 // console.log(assignDeep({ a: 1 }, {})); // { a: 1 }
 // console.log(assignDeep({ a: 1 }, { a: 2 })); // { a: 2 }
 // console.log(assignDeep({ a: 1 }, { c: 3, d: 4 })); // { a: 1, c: 3, d: 4}
