@@ -55,23 +55,26 @@
 
 10.  `missing` - Takes an unsorted array of unique numbers (ie. no repeats) from 1 through some number _n_, and returns the missing number in the sequence (there are either no missing numbers, or exactly one missing number). Can you do it in _O(N)_ time? Hint: There’s a clever formula you can use.
 
+  ```js
+  missing([])                         // undefined
+  missing([1, 4, 3])                  // 2
+  missing([2, 3, 4])                  // 1
+  missing([5, 1, 4, 2])               // 3
+  missing([1, 2, 3, 4])               // undefined
 
-        missing([])                         // undefined
-        missing([1, 4, 3])                  // 2
-        missing([2, 3, 4])                  // 1
-        missing([5, 1, 4, 2])               // 3
-        missing([1, 2, 3, 4])               // undefined
+  ```
 
 11.  `isBalanced` - Takes a string and returns `true` or `false` indicating whether its curly braces are balanced.
 
-
-        isBalanced('{}')                      // true
-        isBalanced('}{')                      // false
-        isBalanced('{{}')                     // false
-        isBalanced('{}{}')                    // true
-        isBalanced('foo { bar { baz } boo }') // true
-        isBalanced('foo { bar { baz }')       // false
-        isBalanced('foo { bar } }')           // false
+  ```js
+  isBalanced('{}')                      // true
+  isBalanced('}{')                      // false
+  isBalanced('{{}')                     // false
+  isBalanced('{}{}')                    // true
+  isBalanced('foo { bar { baz } boo }') // true
+  isBalanced('foo { bar { baz }')       // false
+  isBalanced('foo { bar } }')           // false
+  ```
 
 
 ## Intermediate
@@ -85,9 +88,12 @@
 
 2.  `isBalanced2` - Like the `isBalanced` function you implemented above, but supports 3 types of braces: curly `{}`, square `[]`, and round `()`. A string with interleaving braces should return false.
 
-        isBalanced2('(foo { bar (baz) [boo] })') // true
-        isBalanced2('foo { bar { baz }')         // false
-        isBalanced2('foo { (bar [baz] } )')      // false
+        isBalanced2('[]')); // true
+        isBalanced2('[}')); // false
+        isBalanced2('{[()]}')); // true
+        isBalanced2('(foo { bar (baz) [boo] })')); // true
+        isBalanced2('foo { bar { baz }')); // false
+        isBalanced2('foo { (bar [baz] } )')); // false
 
 3.  `uniq` - Takes an array of numbers, and returns the unique numbers. Can you do it in _O(N)_ time?
 
