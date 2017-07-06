@@ -1,4 +1,4 @@
-# JavaScript Front-end Interview Challenges
+# JavaScript Front-End Interview Challenges
 
 ## Beginner
 
@@ -55,6 +55,7 @@
 
 10.  `missing` - Takes an unsorted array of unique numbers (ie. no repeats) from 1 through some number _n_, and returns the missing number in the sequence (there are either no missing numbers, or exactly one missing number). Can you do it in _O(N)_ time? Hint: There’s a clever formula you can use.
 
+
         missing([])                         // undefined
         missing([1, 4, 3])                  // 2
         missing([2, 3, 4])                  // 1
@@ -63,9 +64,11 @@
 
 11.  `isBalanced` - Takes a string and returns `true` or `false` indicating whether its curly braces are balanced.
 
+
+        isBalanced('{}')                      // true
         isBalanced('}{')                      // false
         isBalanced('{{}')                     // false
-        isBalanced('{}{}')                    // false
+        isBalanced('{}{}')                    // true
         isBalanced('foo { bar { baz } boo }') // true
         isBalanced('foo { bar { baz }')       // false
         isBalanced('foo { bar } }')           // false
