@@ -144,11 +144,15 @@
 
 3.  `seq` - Resolve an array of promises in sequence (as opposed to [`Promise.all`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise/all), which does it in parallel).
 
-        let a = Promise.resolve('a')
-        let b = Promise.resolve('b')
-        let c = Promise.resolve('c')
-        await seq([a, b, c])                  // ['a', 'b', 'c']
-        await seq([a, c, b])                  // ['a', 'c', 'b']
+        let a = Promise.resolve('a');
+        let b = Promise.resolve('b');
+        let c = Promise.resolve('c');
+
+        async function test() {
+          console.log(await seq([a, b, c])); // ['a', 'b', 'c']
+          console.log(await seq([a, c, b])); // ['a', 'c', 'b']
+        }
+        test();
 
 4.  Implement a [`LinkedList`](https://en.wikipedia.org/wiki/Linked_list) class without using JavaScript’s built-in arrays (`[]`). Your LinkedList should support just 2 methods: `add` and `has`:
 

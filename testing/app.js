@@ -1,3 +1,1 @@
 console.clear();
-
-console.log();
